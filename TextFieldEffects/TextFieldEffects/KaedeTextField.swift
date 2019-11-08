@@ -62,9 +62,9 @@ import UIKit
         }
     }
     
-    private let foregroundView = UIView()
-    private let placeholderInsets = CGPoint(x: 10, y: 5)
-    private let textFieldInsets = CGPoint(x: 10, y: 0)
+   let foregroundView = UIView()
+   let placeholderInsets = CGPoint(x: 10, y: 5)
+   let textFieldInsets = CGPoint(x: 10, y: 0)
         
     // MARK: - TextFieldEffects
 

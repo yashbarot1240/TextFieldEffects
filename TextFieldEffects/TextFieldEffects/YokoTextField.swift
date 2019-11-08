@@ -57,12 +57,12 @@ import UIKit
             updatePlaceholder()
         }
     }
-    
-    private let foregroundView = UIView()
-    private let foregroundLayer = CALayer()
-    private let borderThickness: CGFloat = 3
-    private let placeholderInsets = CGPoint(x: 6, y: 6)
-    private let textFieldInsets = CGPoint(x: 6, y: 6)
+   
+    let foregroundView = UIView()
+    let foregroundLayer = CALayer()
+    let borderThickness: CGFloat = 3
+    let placeholderInsets = CGPoint(x: 6, y: 6)
+    let textFieldInsets = CGPoint(x: 6, y: 6)
     
     // MARK: - TextFieldEffects
     

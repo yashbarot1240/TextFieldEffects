@@ -12,10 +12,10 @@ import UIKit
  An AkiraTextField is a subclass of the TextFieldEffects object, is a control that displays an UITextField with a customizable visual effect around the edges of the control.
  */
 @IBDesignable open class AkiraTextField : TextFieldEffects {
-	private let borderSize: (active: CGFloat, inactive: CGFloat) = (1, 2)
-    private let borderLayer = CALayer()
-    private let textFieldInsets = CGPoint(x: 6, y: 0)
-    private let placeholderInsets = CGPoint(x: 6, y: 0)
+	 let borderSize: (active: CGFloat, inactive: CGFloat) = (1, 2)
+     let borderLayer = CALayer()
+     let textFieldInsets = CGPoint(x: 6, y: 0)
+     let placeholderInsets = CGPoint(x: 6, y: 0)
     
     /**
      The color of the border.
@@ -103,6 +103,8 @@ import UIKit
     private func updateBorder() {
         borderLayer.frame = rectForBounds(bounds)
         borderLayer.borderWidth = (isFirstResponder || text!.isNotEmpty) ? borderSize.active : borderSize.inactive
+        borderLayer.backgroundColor = UIColor.red.withAlphaComponent(0.3).cgColor
+        borderLayer.cornerRadius = 5
         borderLayer.borderColor = borderColor?.cgColor
     }
     
