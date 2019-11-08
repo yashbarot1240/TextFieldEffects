@@ -13,9 +13,9 @@ import UIKit
  */
 @IBDesignable open class AkiraTextField : TextFieldEffects {
 	  var borderSize: (active: CGFloat, inactive: CGFloat) = (1, 2)
-    @IBInspectable dynamic open var borderLayer : CALayer?{
+    @IBInspectable dynamic open var borderLayer : CALayer  = CALayer(){
         didSet {
-            borderLayer = CALayer()
+          
             updateBorder()
         }
     }
@@ -74,7 +74,7 @@ import UIKit
         updatePlaceholder()
         
         addSubview(placeholderLabel)
-        layer.addSublayer(borderLayer!)
+        layer.addSublayer(borderLayer)
     }
     
     override open func animateViewsForTextEntry() {
@@ -105,14 +105,14 @@ import UIKit
         placeholderLabel.textAlignment = textAlignment
     }
     func updateBorderLayerBackground(color : UIColor) {
-        borderLayer?.backgroundColor = color.cgColor
+        borderLayer.backgroundColor = color.cgColor
     }
     private func updateBorder() {
-        borderLayer?.frame = rectForBounds(bounds)
-        borderLayer?.borderWidth = (isFirstResponder || text!.isNotEmpty) ? borderSize.active : borderSize.inactive
+        borderLayer.frame = rectForBounds(bounds)
+        borderLayer.borderWidth = (isFirstResponder || text!.isNotEmpty) ? borderSize.active : borderSize.inactive
 //        borderLayer.backgroundColor = UIColor.red.withAlphaComponent(0.3).cgColor
 //        borderLayer.cornerRadius = 5
-        borderLayer?.borderColor = borderColor?.cgColor
+        borderLayer.borderColor = borderColor?.cgColor
     }
     
     private func placeholderFontFromFont(_ font: UIFont) -> UIFont! {
