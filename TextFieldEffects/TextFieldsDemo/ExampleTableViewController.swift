@@ -13,6 +13,8 @@ class ExampleTableViewController : UITableViewController {
     
     @IBOutlet private var textFields: [TextFieldEffects]!
     
+    
+    @IBOutlet private var textFields1: AkiraTextField!
     /**
     Set this value to true if you want to see all the "firstName"
     textFields prepopulated with the name "Raul" (for testing purposes)
@@ -21,7 +23,7 @@ class ExampleTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        textFields1.borderl
         guard prefillTextFields == true else { return }
         
         _ = textFields.map { $0.text = "Raul" }
