@@ -23,9 +23,12 @@ class ExampleTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        textFields1.borderl
+        textFields1.borderLayer.backgroundColor = UIColor.white.cgColor
+       
         guard prefillTextFields == true else { return }
         
         _ = textFields.map { $0.text = "Raul" }
+        
+      
     }
 }
