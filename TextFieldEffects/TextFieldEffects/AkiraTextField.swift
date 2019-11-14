@@ -44,6 +44,8 @@ import UIKit
         }
     }
     
+   
+    
     /**
      The scale of the placeholder font.
      
@@ -100,11 +102,11 @@ import UIKit
     
     private func updatePlaceholder() {
         placeholderLabel.frame = placeholderRect(forBounds: bounds)
-        placeholderLabel.text = placeholder
+        placeholderLabel.text = " " + placeholder! + " "
         placeholderLabel.font = placeholderFontFromFont(font!)
         placeholderLabel.textColor = placeholderColor
         placeholderLabel.textAlignment = textAlignment
-        placeholderLabel.backgroundColor = UIColor.white
+        placeholderLabel.backgroundColor = self.backgroundColor
       
         placeholderLabel.sizeToFit()
         var rect1 = placeholderRect(forBounds: bounds)
