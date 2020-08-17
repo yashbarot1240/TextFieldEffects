@@ -58,10 +58,10 @@ import UIKit
         }
     }
     
-    let borderThickness: CGFloat = 2
-    let placeholderInsets = CGPoint(x: 8, y: 8)
-    let textFieldInsets = CGPoint(x: 8, y: 12)
-    let borderLayer = CALayer()
+    private let borderThickness: CGFloat = 2
+    private let placeholderInsets = CGPoint(x: 8, y: 8)
+    private let textFieldInsets = CGPoint(x: 8, y: 12)
+    private let borderLayer = CALayer()
     
     // MARK: - TextFieldEffects
     

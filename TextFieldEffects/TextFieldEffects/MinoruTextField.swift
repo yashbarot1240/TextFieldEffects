@@ -56,12 +56,12 @@ import UIKit
         }
     }
     
-    let borderThickness: CGFloat = 1
-    let placeholderInsets = CGPoint(x: 6, y: 6)
-    let textFieldInsets = CGPoint(x: 6, y: 6)
-    let borderLayer = CALayer()
-    var backgroundLayerColor: UIColor?    
-   
+    private let borderThickness: CGFloat = 1
+    private let placeholderInsets = CGPoint(x: 6, y: 6)
+    private let textFieldInsets = CGPoint(x: 6, y: 6)
+    private let borderLayer = CALayer()
+    private var backgroundLayerColor: UIColor?    
+    
     // MARK: - TextFieldEffects
     
     override open func drawViewsForRect(_ rect: CGRect) {
