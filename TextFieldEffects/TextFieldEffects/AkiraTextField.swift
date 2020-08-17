@@ -12,10 +12,9 @@ import UIKit
  An AkiraTextField is a subclass of the TextFieldEffects object, is a control that displays an UITextField with a customizable visual effect around the edges of the control.
  */
 @IBDesignable open class AkiraTextField : TextFieldEffects {
-	var borderSize: (active: CGFloat, inactive: CGFloat) = (1, 0.5)
+    open var borderSize: (active: CGFloat, inactive: CGFloat) = (1, 1)
     @IBInspectable dynamic open var borderLayer : CALayer  = CALayer(){
         didSet {
-          
             updateBorder()
         }
     }
@@ -26,7 +25,7 @@ import UIKit
      The color of the border.
      
      This property applies a color to the bounds of the control. The default value for this property is a clear color.
-    */
+     */
     @IBInspectable dynamic open var borderColor: UIColor? {
         didSet {
             updateBorder()
@@ -43,13 +42,13 @@ import UIKit
             updatePlaceholder()
         }
     }
-        
+    
     @IBInspectable dynamic open var placeholderSelectedColor: UIColor = .blue {
         didSet {
             updatePlaceholder()
         }
     }
-
+    
     /**
      The scale of the placeholder font.
      
@@ -79,7 +78,7 @@ import UIKit
         updateBorder()
         updatePlaceholder()
         
-	layer.addSublayer(borderLayer)
+        layer.addSublayer(borderLayer)
         addSubview(placeholderLabel)
     }
     
@@ -104,12 +103,12 @@ import UIKit
         let origin = CGPoint(x: bounds.origin.x + placeholderInsets.x, y: bounds.origin.y + placeholderHeight/2)
         return CGRect(origin: origin, size: bounds.size)
     }
-
+    
     open override func repositionRightView(CurrentBounds bounds: CGRect) -> CGRect {
         let origin = CGPoint(x: bounds.origin.x - placeholderInsets.x, y: bounds.origin.y + placeholderHeight/2)
         return CGRect(origin: origin, size: bounds.size)
     }
-
+    
     open override func repositionClearButton(CurrentBounds bounds: CGRect) -> CGRect {
         let origin = CGPoint(x: bounds.origin.x - placeholderInsets.x, y: bounds.origin.y + placeholderHeight/2)
         return CGRect(origin: origin, size: bounds.size)
@@ -117,23 +116,18 @@ import UIKit
     // MARK: Private
     
     private func updatePlaceholder() {
-	placeholderLabel.frame = placeholderRect(forBounds: bounds)
+        placeholderLabel.frame = placeholderRect(forBounds: bounds)
         placeholderLabel.text = " " + placeholder! + " "
         placeholderLabel.font = placeholderFontFromFont(font!)
         placeholderLabel.textColor = (isFirstResponder || text!.isNotEmpty) ? placeholderSelectedColor : placeholderColor
         placeholderLabel.textAlignment = textAlignment
         placeholderLabel.backgroundColor = self.backgroundColor
-      
+        
         placeholderLabel.sizeToFit()
         var rect1 = placeholderRect(forBounds: bounds)
         rect1.size.width = placeholderLabel.frame.size.width
-         rect1.size.height = placeholderLabel.frame.size.height
+        rect1.size.height = placeholderLabel.frame.size.height
         placeholderLabel.frame = rect1
-//         placeholderLabel.frame = placeholderRect(forBounds: bounds)
-//         placeholderLabel.text = placeholder
-//         placeholderLabel.font = placeholderFontFromFont(font!)
-//         placeholderLabel.textColor = placeholderColor
-//         placeholderLabel.textAlignment = textAlignment
     }
     
     private func updateBorder() {
@@ -143,7 +137,7 @@ import UIKit
     }
     
     private func placeholderFontFromFont(_ font: UIFont) -> UIFont! {
-     let smallerFont = UIFont(descriptor: font.fontDescriptor, size: font.pointSize * placeholderFontScale)
+        let smallerFont = UIFont(descriptor: font.fontDescriptor, size: font.pointSize * placeholderFontScale)
         return smallerFont
     }
     
@@ -155,22 +149,22 @@ import UIKit
         return CGRect(x: bounds.origin.x, y: bounds.origin.y + (placeholderHeight * 0.5), width: bounds.size.width, height: bounds.size.height - (placeholderHeight * 0.5))
     }
     private func correctedBounds(ForBounds bounds:CGRect)->CGRect{
-	         
-	 let correctedBounds = bounds.insetBy(dx: textFieldInsets.x, dy: 0)
-//         return correctedBounds.offsetBy(dx: 0, dy: textFieldInsets.y + placeholderHeight/2)
-
-	 if isFirstResponder || text!.isNotEmpty {
+        
+        let correctedBounds = bounds.insetBy(dx: textFieldInsets.x, dy: 0)
+        //         return correctedBounds.offsetBy(dx: 0, dy: textFieldInsets.y + placeholderHeight/2)
+        
+        if isFirstResponder || text!.isNotEmpty {
             return correctedBounds.offsetBy(dx: 0, dy: textFieldInsets.y + placeholderHeight/2)
         } else {
             return correctedBounds.offsetBy(dx: 0, dy: ((bounds.height/2) - (placeholderHeight/2) + (placeholderHeight * 0.25)))
         }
     }
-
+    
     // MARK: - Overrides
     
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         if isFirstResponder || text!.isNotEmpty {
-		var originX:CGFloat = placeholderInsets.x
+            var originX:CGFloat = placeholderInsets.x
             switch textAlignment {
             case .natural,.justified:
                 if #available(iOS 9.0, *) {
@@ -184,29 +178,29 @@ import UIKit
                 break
             }
             return CGRect(x: originX, y: placeholderInsets.y, width: bounds.width, height: placeholderHeight)
-//             return CGRect(x: placeholderInsets.x, y: placeholderInsets.y, width: bounds.width, height: placeholderHeight)
+            //             return CGRect(x: placeholderInsets.x, y: placeholderInsets.y, width: bounds.width, height: placeholderHeight)
         } else {
             return textRect(forBounds: bounds)
         }
     }
     
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
-	  let fixedBounds = super.editingRect(forBounds: bounds)
-       	 return correctedBounds(ForBounds: fixedBounds)
-
-//         return textRect(forBounds: bounds)
+        let fixedBounds = super.editingRect(forBounds: bounds)
+        return correctedBounds(ForBounds: fixedBounds)
+        
+        //         return textRect(forBounds: bounds)
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-// 	if isFirstResponder || text!.isNotEmpty {
-//             return bounds.offsetBy(dx: textFieldInsets.x, dy: textFieldInsets.y + placeholderHeight/2)
-//         } else {
-//             return bounds.offsetBy(dx: textFieldInsets.x, dy: ((bounds.height/2) - (placeholderHeight/2) + (placeholderHeight * 0.25)))
-//         }
-	   
-	let fixedBounds = super.textRect(forBounds: bounds)
+        // 	if isFirstResponder || text!.isNotEmpty {
+        //             return bounds.offsetBy(dx: textFieldInsets.x, dy: textFieldInsets.y + placeholderHeight/2)
+        //         } else {
+        //             return bounds.offsetBy(dx: textFieldInsets.x, dy: ((bounds.height/2) - (placeholderHeight/2) + (placeholderHeight * 0.25)))
+        //         }
+        
+        let fixedBounds = super.textRect(forBounds: bounds)
         return correctedBounds(ForBounds: fixedBounds)
-//         return bounds.offsetBy(dx: textFieldInsets.x, dy: textFieldInsets.y + placeholderHeight/2)
+        //         return bounds.offsetBy(dx: textFieldInsets.x, dy: textFieldInsets.y + placeholderHeight/2)
     }
 }
 
